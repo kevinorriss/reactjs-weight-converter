@@ -1,0 +1,21 @@
+{
+  "name": "@kevinorriss/weight-converter",
+  "version": "0.1.0",
+  "description": "",
+  "main": "build/weight-converter.min.js",
+  "scripts": {
+    "build": "rollup -c -o build/weight-converter.min.js",
+    "dev": "rollup -c --watch -o build/weight-converter.min.js"
+  },
+  "author": "Kevin Orriss <kevinorriss@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "rollup": "^1.21.2",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-uglify": "^6.0.3"
+  }
+}
