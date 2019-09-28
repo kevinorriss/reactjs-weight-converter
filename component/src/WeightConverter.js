@@ -27,9 +27,7 @@ class WeightConverter extends Component {
             return stringValue
         }
 
-        return (stringValue.match(/^\d+(?:\.\d{0,2})?/)[0])
-            .replace(/0+$/g, '')
-            .replace(/\.$/g, '')
+        return value.toFixed(2).replace(/0+$/g, '').replace(/\.$/g, '')
     }
 
     static lbToKg(lbs) {
@@ -134,7 +132,7 @@ class WeightConverter extends Component {
 
         // set the new values
         this.setState({
-            stones: [string, stLbs],
+            stones: [string, stLbs || 0],
             pounds: WeightConverter.toDecimalString(lbs),
             kilgorams: WeightConverter.lbToKg(lbs)
         })
