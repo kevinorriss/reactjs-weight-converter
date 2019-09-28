@@ -10,7 +10,7 @@ test('Should convert valid LB integer', () => {
     pounds.simulate('change', pounds)
 
     const kilograms = wrapper.find('input[name="kilograms"]')
-    expect(kilograms.props().value).toEqual('65.3')
+    expect(kilograms.props().value).toEqual('65.32')
 
     const stones = wrapper.find('input[name="stones"]')
     expect(stones.props().value).toEqual('10')
@@ -27,7 +27,7 @@ test('Should convert valid LB decimal', () => {
     pounds.simulate('change', pounds)
 
     const kilograms = wrapper.find('input[name="kilograms"]')
-    expect(kilograms.props().value).toEqual('44.68')
+    expect(kilograms.props().value).toEqual('44.69')
 
     const stones = wrapper.find('input[name="stones"]')
     expect(stones.props().value).toEqual('7')
@@ -77,10 +77,6 @@ test('Should reject invalid LB', () => {
     const wrapper = mount(<WeightConverter />)
 
     const pounds = wrapper.find('input[name="pounds"]')
-
-    pounds.instance().value = ''
-    pounds.simulate('change', pounds)
-
     pounds.instance().value = 'abc'
     pounds.simulate('change', pounds)
 
