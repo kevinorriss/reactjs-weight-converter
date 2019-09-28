@@ -10,7 +10,7 @@ test('Should convert valid LB integer', () => {
     pounds.simulate('change', pounds)
 
     const kilograms = wrapper.find('input[name="kilograms"]')
-    expect(kilograms.props().value).toEqual('65.3')
+    expect(kilograms.props().value).toEqual('65.32')
 
     const stones = wrapper.find('input[name="stones"]')
     expect(stones.props().value).toEqual('10')
@@ -27,7 +27,7 @@ test('Should convert valid LB decimal', () => {
     pounds.simulate('change', pounds)
 
     const kilograms = wrapper.find('input[name="kilograms"]')
-    expect(kilograms.props().value).toEqual('44.68')
+    expect(kilograms.props().value).toEqual('44.69')
 
     const stones = wrapper.find('input[name="stones"]')
     expect(stones.props().value).toEqual('7')
@@ -36,62 +36,58 @@ test('Should convert valid LB decimal', () => {
     expect(stonePounds.props().value).toEqual('0.52')
 })
 
-// test('Should handle 0 KG', () => {
-//     const wrapper = mount(<WeightConverter />)
+test('Should handle 0 LB', () => {
+    const wrapper = mount(<WeightConverter />)
 
-//     const kilograms = wrapper.find('input[name="kilograms"]')
-//     kilograms.instance().value = "0"
-//     kilograms.simulate('change', kilograms)
+    const pounds = wrapper.find('input[name="pounds"]')
+    pounds.instance().value = "0"
+    pounds.simulate('change', pounds)
 
-//     const pounds = wrapper.find('input[name="pounds"]')
-//     expect(pounds.props().value).toEqual('0')
+    const kilograms = wrapper.find('input[name="kilograms"]')
+    expect(kilograms.props().value).toEqual('0')
 
-//     const stones = wrapper.find('input[name="stones"]')
-//     expect(stones.props().value).toEqual('0')
+    const stones = wrapper.find('input[name="stones"]')
+    expect(stones.props().value).toEqual('0')
 
-//     const stonePounds = wrapper.find('input[name="stonePounds"]')
-//     expect(stonePounds.props().value).toEqual('0')
-// })
+    const stonePounds = wrapper.find('input[name="stonePounds"]')
+    expect(stonePounds.props().value).toEqual('0')
+})
 
-// test('Should clear inputs on blank KG', () => {
-//     const wrapper = mount(<WeightConverter />)
+test('Should clear inputs on blank LB', () => {
+    const wrapper = mount(<WeightConverter />)
 
-//     const kilograms = wrapper.find('input[name="kilograms"]')
-//     kilograms.instance().value = "10"
-//     kilograms.simulate('change', kilograms)
+    const pounds = wrapper.find('input[name="pounds"]')
+    pounds.instance().value = "10"
+    pounds.simulate('change', pounds)
 
-//     kilograms.instance().value = ""
-//     kilograms.simulate('change', kilograms)
+    pounds.instance().value = ""
+    pounds.simulate('change', pounds)
 
-//     const pounds = wrapper.find('input[name="pounds"]')
-//     expect(pounds.props().value).toEqual('')
+    const kilograms = wrapper.find('input[name="kilograms"]')
+    expect(kilograms.props().value).toEqual('')
 
-//     const stones = wrapper.find('input[name="stones"]')
-//     expect(stones.props().value).toEqual('')
+    const stones = wrapper.find('input[name="stones"]')
+    expect(stones.props().value).toEqual('')
 
-//     const stonePounds = wrapper.find('input[name="stonePounds"]')
-//     expect(stonePounds.props().value).toEqual('')
-// })
+    const stonePounds = wrapper.find('input[name="stonePounds"]')
+    expect(stonePounds.props().value).toEqual('')
+})
 
-// test('Should reject invalid KG', () => {
-//     const wrapper = mount(<WeightConverter />)
+test('Should reject invalid LB', () => {
+    const wrapper = mount(<WeightConverter />)
 
-//     const kilograms = wrapper.find('input[name="kilograms"]')
+    const pounds = wrapper.find('input[name="pounds"]')
+    pounds.instance().value = 'abc'
+    pounds.simulate('change', pounds)
 
-//     kilograms.instance().value = ''
-//     kilograms.simulate('change', kilograms)
+    expect(pounds.props().value).toEqual('')
 
-//     kilograms.instance().value = 'abc'
-//     kilograms.simulate('change', kilograms)
+    const kilograms = wrapper.find('input[name="kilograms"]')
+    expect(kilograms.props().value).toEqual('')
 
-//     expect(kilograms.props().value).toEqual('')
+    const stones = wrapper.find('input[name="stones"]')
+    expect(stones.props().value).toEqual('')
 
-//     const pounds = wrapper.find('input[name="pounds"]')
-//     expect(pounds.props().value).toEqual('')
-
-//     const stones = wrapper.find('input[name="stones"]')
-//     expect(stones.props().value).toEqual('')
-
-//     const stonePounds = wrapper.find('input[name="stonePounds"]')
-//     expect(stonePounds.props().value).toEqual('')
-// })
+    const stonePounds = wrapper.find('input[name="stonePounds"]')
+    expect(stonePounds.props().value).toEqual('')
+})

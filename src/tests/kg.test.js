@@ -77,10 +77,6 @@ test('Should reject invalid KG', () => {
     const wrapper = mount(<WeightConverter />)
 
     const kilograms = wrapper.find('input[name="kilograms"]')
-
-    kilograms.instance().value = ''
-    kilograms.simulate('change', kilograms)
-
     kilograms.instance().value = 'abc'
     kilograms.simulate('change', kilograms)
 

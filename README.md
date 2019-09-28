@@ -37,10 +37,10 @@ This repo comes with a react app for development purposes. To get started, open 
 ### Link the component to the app
 ```
 cd ./component
-npm link
+yarn link
 
 cd ..
-npm link @kevinorriss/weight-converter
+yarn link @kevinorriss/weight-converter
 ```
 
 ### Start the app
@@ -57,8 +57,13 @@ npm run dev
 Whenever you make a change to the component code, the react app will update.
 
 ## Tests
+```
+yarn test
+```
 
-TODO Write unit tests
+This project uses Jest and Enzyme for its unit tests, simply run the above code to run the test suites.
+
+If you want the tests to run during development, you will need to have rollup watching too!
 
 ## Author
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
 class WeightConverter extends Component {
+
+    // initialise the state and bind the functions
     constructor(props) {
         super(props);
         
@@ -17,37 +19,43 @@ class WeightConverter extends Component {
         this.onStonePoundsChange = this.onStonePoundsChange.bind(this)
     }
 
+    // initialise the inputs to empty
     componentDidMound() {
         this.clear()
     }
 
+    // formats a number to 2 decimal places, trimming any trailing 0's
+    // 10.00 -> 10      5.20 -> 5.2     4.652 -> 4.65
     static toDecimalString(value) {
         const stringValue = value.toString()
         if (stringValue.match(/^-?\d+$/)) {
             return stringValue
         }
 
-        return (stringValue.match(/^\d+(?:\.\d{0,2})?/)[0])
-            .replace(/0+$/g, '')
-            .replace(/\.$/g, '')
+        return value.toFixed(2).replace(/0+$/g, '').replace(/\.$/g, '')
     }
 
+    // returns the number of kg in the given lbs
     static lbToKg(lbs) {
-        return WeightConverter.toDecimalString(lbs / 2.205)
+        return WeightConverter.toDecimalString(lbs / 2.2045855379189)
     }
 
+    // returns a 2 element array of stones (0) and pounds (1) in the given lbs
     static lbToSt(lbs) {
         return [Math.floor(lbs / 14).toString(), WeightConverter.toDecimalString(lbs % 14)]
     }
 
+    // checks if the given string is either a positive whole number or an empty string
     static isIntegerOrBlank(string) {
         return string.match(/^\d+$|^$/)
     }
 
+    // checks if the given string is either a positive decimal (optional, to 2 places) number or an empty string
     static isDecimalOrBlank(string) {
         return string.match(/^\d+(\.\d{0,2})?$|^$/)
     }
 
+    // clears the inputs to empty strings
     clear() {
         this.setState({
             kilgorams: '',
@@ -74,7 +82,7 @@ class WeightConverter extends Component {
         }
 
         // calculate the lbs from kg
-        const lbs = kgs * 2.205
+        const lbs = kgs * 2.2045855379189
 
         // set the new values
         this.setState({
@@ -134,7 +142,7 @@ class WeightConverter extends Component {
 
         // set the new values
         this.setState({
-            stones: [string, stLbs],
+            stones: [string, (stLbs || '').toString()],
             pounds: WeightConverter.toDecimalString(lbs),
             kilgorams: WeightConverter.lbToKg(lbs)
         })
@@ -153,14 +161,10 @@ class WeightConverter extends Component {
         // parse the value to a float
         let stLbs = parseFloat(string)
 
-        // if the value couldn't be parsed (blank string)
-        // default it to 0
-        if (isNaN(stLbs)) {
-            stLbs = 0;
         // if the value is 14 or more, dismiss the event
         // user shouldn't be able to say 10 stone and 28 pounds
         // because that is 12 stone
-        } else if (stLbs >= 14) {
+        if (stLbs >= 14) {
             return
         }
 
@@ -180,7 +184,7 @@ class WeightConverter extends Component {
 
         // set the new values
         this.setState({
-            stones: [st, string],
+            stones: [(st || '').toString(), string],
             pounds: WeightConverter.toDecimalString(lbs),
             kilgorams: WeightConverter.lbToKg(lbs)
         })
